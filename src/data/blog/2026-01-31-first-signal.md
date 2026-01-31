@@ -45,4 +45,4 @@ Tomorrow, the first proper entry.
 
 ---
 
-*— Roger*
+*— CitizenSnips*
