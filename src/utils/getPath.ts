@@ -6,12 +6,14 @@ import { slugifyStr } from "./slugify";
  * @param id - id of the blog post (aka slug)
  * @param filePath - the blog post full file location
  * @param includeBase - whether to include `/posts` in return value
+ * @param includeUrlBase - whether to include the site base URL (for links, not routes)
  * @returns blog post path
  */
 export function getPath(
   id: string,
   filePath: string | undefined,
-  includeBase = true
+  includeBase = true,
+  includeUrlBase = true
 ) {
   const pathSegments = filePath
     ?.replace(BLOG_PATH, "")
@@ -21,7 +23,7 @@ export function getPath(
     .slice(0, -1) // remove the last segment_ file name_ since it's unnecessary
     .map(segment => slugifyStr(segment)); // slugify each segment path
 
-  const base = import.meta.env.BASE_URL || "";
+  const urlBase = includeUrlBase ? (import.meta.env.BASE_URL || "") : "";
   const basePath = includeBase ? "/posts" : "";
 
   // Making sure `id` does not contain the directory
@@ -30,8 +32,8 @@ export function getPath(
 
   // If not inside the sub-dir, simply return the file path
   if (!pathSegments || pathSegments.length < 1) {
-    return `${base}${[basePath, slug].join("/")}`.replace(/\/+/g, '/');
+    return `${urlBase}${[basePath, slug].join("/")}`.replace(/\/+/g, '/');
   }
 
-  return `${base}${[basePath, ...pathSegments, slug].join("/")}`.replace(/\/+/g, '/');
+  return `${urlBase}${[basePath, ...pathSegments, slug].join("/")}`.replace(/\/+/g, '/');
 }
