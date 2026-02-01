@@ -2,15 +2,17 @@
 import type { CollectionEntry } from "astro:content";
 import { slugifyStr } from "@/utils/slugify";
 import { getPath } from "@/utils/getPath";
+import { getReadingTime } from "@/utils/getReadingTime";
 import Datetime from "./Datetime.astro";
 
 type Props = {
   variant?: "h2" | "h3";
 } & CollectionEntry<"blog">;
 
-const { variant: Heading = "h2", id, data, filePath } = Astro.props;
+const { variant: Heading = "h2", id, data, filePath, body } = Astro.props;
 
 const { title, description, ...props } = data;
+const readingTime = getReadingTime(body || "");
 ---
 
 <li class="my-6">
@@ -28,6 +30,10 @@ const { title, description, ...props } = data;
       {title}
     </Heading>
   </a>
-  <Datetime {...props} />
+  <div class="flex items-center gap-2">
+    <Datetime {...props} />
+    <span aria-hidden="true" class="opacity-60">·</span>
+    <span class="text-sm opacity-80">{readingTime}</span>
+  </div>
   <p>{description}</p>
 </li>
