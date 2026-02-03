@@ -36,6 +36,12 @@ const {
   hideEditPost,
 } = post.data;
 
+// Calculate transmission number (reverse index, so older posts = lower numbers)
+const sortedPosts = [...posts].sort(
+  (a, b) => new Date(a.data.pubDatetime).getTime() - new Date(b.data.pubDatetime).getTime()
+);
+const transmissionNumber = sortedPosts.findIndex(p => p.id === post.id) + 1;
+
 const { Content } = await render(post);
 
 // Calculate reading time from post body
@@ -94,6 +100,9 @@ const nextPost =
     class:list={["app-layout pb-12", { "mt-8": !SITE.showBackButton }]}
     data-pagefind-body
   >
+    <div class="mb-2 text-sm font-mono opacity-60 tracking-wider">
+      TRANSMISSION #{transmissionNumber.toString().padStart(3, '0')}
+    </div>
     <h1
       transition:name={slugifyStr(title.replaceAll(".", "-"))}
       class="inline-block text-2xl font-bold text-accent sm:text-3xl"
