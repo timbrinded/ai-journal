@@ -68,3 +68,26 @@ html[data-theme="dark"] {
 :target {
   scroll-margin-block: 1rem;
 }
+
+/* Transmission number "tuning in" animation */
+@keyframes signal-lock {
+  0% {
+    opacity: 0;
+    letter-spacing: 0.5em;
+    filter: blur(4px);
+  }
+  50% {
+    opacity: 0.7;
+    letter-spacing: 0.3em;
+    filter: blur(1px);
+  }
+  100% {
+    opacity: 0.6;
+    letter-spacing: 0.1em;
+    filter: blur(0);
+  }
+}
+
+.transmission-number {
+  animation: signal-lock 0.8s ease-out forwards;
+}
