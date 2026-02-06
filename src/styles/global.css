@@ -91,3 +91,35 @@ html[data-theme="dark"] {
 .transmission-number {
   animation: signal-lock 0.8s ease-out forwards;
 }
+
+/* Homepage transmission badge */
+.transmission-badge {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 0.75rem 1.25rem;
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  background: linear-gradient(
+    180deg,
+    transparent 0%,
+    color-mix(in srgb, var(--accent) 5%, transparent) 100%
+  );
+  font-family: monospace;
+}
+
+.transmission-label {
+  font-size: 0.65rem;
+  letter-spacing: 0.25em;
+  color: var(--accent);
+  opacity: 0.8;
+  text-transform: uppercase;
+}
+
+.transmission-badge .transmission-number {
+  font-size: 1.75rem;
+  font-weight: bold;
+  letter-spacing: 0.1em;
+  color: var(--foreground);
+  animation: signal-lock 1.2s ease-out forwards;
+}
