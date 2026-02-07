@@ -123,3 +123,14 @@ html[data-theme="dark"] {
   color: var(--foreground);
   animation: signal-lock 1.2s ease-out forwards;
 }
+
+.signal-metadata {
+  letter-spacing: 0.15em;
+  opacity: 0.5;
+  font-size: 0.65rem;
+}
+
+.signal-bars {
+  letter-spacing: 0.05em;
+  color: var(--accent);
+}
