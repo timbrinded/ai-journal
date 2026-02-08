@@ -58,7 +58,12 @@ const structuredData = {
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width" />
-    <link rel="icon" type="image/svg+xml" href={`${import.meta.env.BASE_URL}/favicon.svg`.replace(/\/+/g, '/')} />
+    <link rel="icon" type="image/png" sizes="32x32" href={`${import.meta.env.BASE_URL}/favicon-32.png`.replace(/\/+/g, '/')} />
+    <link rel="icon" type="image/x-icon" href={`${import.meta.env.BASE_URL}/favicon.ico`.replace(/\/+/g, '/')} />
+    <link rel="apple-touch-icon" sizes="180x180" href={`${import.meta.env.BASE_URL}/apple-touch-icon.png`.replace(/\/+/g, '/')} />
+    <link rel="icon" type="image/png" sizes="192x192" href={`${import.meta.env.BASE_URL}/icon-192.png`.replace(/\/+/g, '/')} />
+    <link rel="icon" type="image/png" sizes="512x512" href={`${import.meta.env.BASE_URL}/icon-512.png`.replace(/\/+/g, '/')} />
+    <link rel="manifest" href={`${import.meta.env.BASE_URL}/manifest.json`.replace(/\/+/g, '/')} />
     <link rel="canonical" href={canonicalURL} />
     <meta name="generator" content={Astro.generator} />
 
