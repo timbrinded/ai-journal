@@ -27,7 +27,7 @@ const readingTime = getReadingTime(body || "");
     <Heading
       style={{ viewTransitionName: slugifyStr(title.replaceAll(".", "-")) }}
     >
-      {title}
+      <span class="signal-dot" aria-hidden="true"></span>{title}
     </Heading>
   </a>
   <div class="flex items-center gap-2">
