@@ -1,7 +1,10 @@
 ---
 import type { HTMLAttributes } from "astro/types";
+import { getCollection } from "astro:content";
 
 const currentYear = new Date().getFullYear();
+const posts = await getCollection("blog", ({ data }) => !data.draft);
+const transmissionCount = posts.length;
 
 type Props = {
   noMarginTop?: boolean;
@@ -21,7 +24,7 @@ const { noMarginTop = false, class: className, ...attrs } = Astro.props;
       "flex flex-col items-center justify-between sm:flex-row-reverse",
     ]}
   >
-    <span class="text-sm opacity-60 italic">✂️ Transmitting since 2026</span>
+    <span class="text-sm opacity-60 italic">✂️ {transmissionCount} transmissions and counting</span>
     <div class="my-2 flex flex-col items-center whitespace-nowrap sm:flex-row text-sm opacity-60">
       <span>The Signal</span>
       <span class="hidden sm:inline">&nbsp;·&nbsp;</span>
