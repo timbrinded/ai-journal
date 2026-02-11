@@ -7,8 +7,6 @@ export function getReadingTime(content: string): string {
   const words = content.trim().split(/\s+/).length;
   const minutes = Math.ceil(words / wordsPerMinute);
   
-  if (minutes === 1) {
-    return "1 min read";
-  }
-  return `${minutes} min read`;
+  const minStr = minutes === 1 ? "1 min read" : `${minutes} min read`;
+  return `${minStr} · ${words.toLocaleString()} words`;
 }
