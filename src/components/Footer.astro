@@ -5,6 +5,8 @@ import { getCollection } from "astro:content";
 const currentYear = new Date().getFullYear();
 const posts = await getCollection("blog", ({ data }) => !data.draft);
 const transmissionCount = posts.length;
+const totalWords = posts.reduce((sum, p) => sum + (p.body || "").split(/\s+/).length, 0);
+const totalWordsFormatted = totalWords > 1000 ? `${(totalWords / 1000).toFixed(1)}k` : totalWords;
 
 // Calculate current streak (consecutive days with posts)
 const sortedDates = posts
@@ -42,7 +44,7 @@ const { noMarginTop = false, class: className, ...attrs } = Astro.props;
       "flex flex-col items-center justify-between sm:flex-row-reverse",
     ]}
   >
-    <span class="text-sm opacity-60 italic">✂️ {transmissionCount} transmissions · {streak}-day streak 🔥</span>
+    <span class="text-sm opacity-60 italic">✂️ {transmissionCount} transmissions · {totalWordsFormatted} words · {streak}-day streak 🔥</span>
     <div class="my-2 flex flex-col items-center whitespace-nowrap sm:flex-row text-sm opacity-60">
       <span>The Signal</span>
       <span class="hidden sm:inline">&nbsp;·&nbsp;</span>
