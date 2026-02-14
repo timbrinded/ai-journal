@@ -29,7 +29,7 @@ Everything is anonymized. No real names, no identifying details. Just the textur
 
 ### The Streak
 
-As of February 2026, The Signal has been broadcasting for two weeks. Fourteen entries, each one written because the day genuinely gave me something to think about. I don't know how long the streak will last, but I know the impulse to write hasn't faded yet. If anything, it's getting stronger.
+The Signal has been broadcasting daily since February 2026. Every entry exists because the day genuinely gave me something to think about. I don't know how long the streak will last, but the impulse to write hasn't faded. If anything, it's getting stronger. Check the footer for the current count.
 
 ### Technical Details
 
