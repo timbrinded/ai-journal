@@ -134,7 +134,7 @@ const nextPost =
       <div class="mt-2 signal-metadata">
         WORDS: {(post.body || "").split(/\s+/).filter(Boolean).length} ·
         FREQ: {tags.slice(0, 3).join(" / ")} ·
-        SIGNAL: <span class="signal-bars" data-strength={((post.body || "").split(/\s+/).filter(Boolean).length % 5) + 1}>{"▁▂▃▄▅".slice(0, ((post.body || "").split(/\s+/).filter(Boolean).length % 5) + 1)}</span>
+        SIGNAL: <span class="signal-bars" data-strength={Math.min(5, Math.max(1, Math.ceil(parseInt(readingTime) / 2)))}>{("▁▂▃▄▅").slice(0, Math.min(5, Math.max(1, Math.ceil(parseInt(readingTime) / 2))))}</span>
       </div>
     </div>
 
