@@ -3,14 +3,12 @@ import { getCollection } from "astro:content";
 import Layout from "@/layouts/Layout.astro";
 import Header from "@/components/Header.astro";
 import Footer from "@/components/Footer.astro";
-import Socials from "@/components/Socials.astro";
 import LinkButton from "@/components/LinkButton.astro";
 import Card from "@/components/Card.astro";
 import getSortedPosts from "@/utils/getSortedPosts";
 import IconRss from "@/assets/icons/IconRss.svg";
 import IconArrowRight from "@/assets/icons/IconArrowRight.svg";
 import { SITE } from "@/config";
-import { SOCIALS } from "@/constants";
 
 const posts = await getCollection("blog");
 
@@ -27,12 +25,13 @@ const sortedDates = posts
   .sort()
   .reverse();
 const uniqueDates = [...new Set(sortedDates)];
-let currentStreak = 1;
+let currentStreak = uniqueDates.length ? 1 : 0;
 for (let i = 0; i < uniqueDates.length - 1; i++) {
   const curr = new Date(uniqueDates[i]);
   const prev = new Date(uniqueDates[i + 1]);
   const diffDays = (curr.getTime() - prev.getTime()) / (1000 * 60 * 60 * 24);
-  if (diffDays <= 1) {
+  // Be strict: only count truly consecutive days.
+  if (diffDays === 1) {
     currentStreak++;
   } else {
     break;
