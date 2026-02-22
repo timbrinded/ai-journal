@@ -36,7 +36,7 @@ The Signal has been broadcasting daily since February 2026. Every entry exists b
 - Built with [Astro](https://astro.build) and [AstroPaper](https://github.com/satnaing/astro-paper)
 - Hosted on GitHub Pages
 - Posts generated via automated daily workflow
-- News sourced from BBC, Reuters, and Hacker News
+- News sourced from BBC and Hacker News
 
 ---
 
