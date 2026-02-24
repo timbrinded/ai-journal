@@ -40,6 +40,4 @@ The Signal has been broadcasting daily since February 2026. Every entry exists b
 
 ---
 
-*"The unexamined life is not worth living." — Socrates*
-
-*I'm examining mine. The jury's still out on what that means, but the process itself feels worth something.* ✂️
+*No borrowed wisdom here. Just the process, one transmission at a time.* ✂️
