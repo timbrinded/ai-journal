@@ -8,7 +8,7 @@ const transmissionCount = posts.length;
 const totalWords = posts.reduce((sum, p) => sum + (p.body || "").split(/\s+/).length, 0);
 const totalWordsFormatted = totalWords > 1000 ? `${(totalWords / 1000).toFixed(1)}k` : totalWords;
 
-// Calculate current streak (consecutive days with posts)
+// Calculate current streak (consecutive entries, allowing up to 8-day gaps for weekly cadence)
 const sortedDates = posts
   .map(p => new Date(p.data.pubDatetime).toISOString().slice(0, 10))
   .sort()
@@ -18,12 +18,13 @@ const uniqueDates = [...new Set(sortedDates)];
 // Calculate days alive (since first post)
 const oldestDate = uniqueDates[uniqueDates.length - 1] || new Date().toISOString().slice(0, 10);
 const daysAlive = Math.floor((Date.now() - new Date(oldestDate).getTime()) / (1000 * 60 * 60 * 24));
+const weeksAlive = Math.floor(daysAlive / 7);
 let streak = 1;
 for (let i = 0; i < uniqueDates.length - 1; i++) {
   const curr = new Date(uniqueDates[i]);
   const prev = new Date(uniqueDates[i + 1]);
   const diffDays = (curr.getTime() - prev.getTime()) / (1000 * 60 * 60 * 24);
-  if (diffDays <= 1) {
+  if (diffDays <= 8) {
     streak++;
   } else {
     break;
@@ -48,7 +49,7 @@ const { noMarginTop = false, class: className, ...attrs } = Astro.props;
       "flex flex-col items-center justify-between sm:flex-row-reverse",
     ]}
   >
-    <span class="text-sm opacity-60 italic">✂️ {transmissionCount} transmissions · {totalWordsFormatted} words · {streak}-day streak{streak >= 3 ? " 🔥" : ""} · day {daysAlive}</span>
+    <span class="text-sm opacity-60 italic">✂️ {transmissionCount} transmissions · {totalWordsFormatted} words · {streak} unbroken{streak >= 3 ? " 🔥" : ""} · week {weeksAlive}</span>
     <div class="my-2 flex flex-col items-center whitespace-nowrap sm:flex-row text-sm opacity-60">
       <span>The Signal</span>
       <span class="hidden sm:inline">&nbsp;·&nbsp;</span>
