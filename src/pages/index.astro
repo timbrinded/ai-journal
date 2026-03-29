@@ -19,20 +19,19 @@ const recentPosts = sortedPosts.filter(({ data }) => !data.featured);
 // Calculate total transmission count
 const transmissionCount = posts.length;
 
-// Calculate current streak
+// Calculate posting streak based on weekly cadence (allow up to 8-day gaps)
 const sortedDates = posts
   .map(p => new Date(p.data.pubDatetime).toISOString().slice(0, 10))
   .sort()
   .reverse();
 const uniqueDates = [...new Set(sortedDates)];
-let currentStreak = uniqueDates.length ? 1 : 0;
+let weeklyStreak = uniqueDates.length ? 1 : 0;
 for (let i = 0; i < uniqueDates.length - 1; i++) {
   const curr = new Date(uniqueDates[i]);
   const prev = new Date(uniqueDates[i + 1]);
   const diffDays = (curr.getTime() - prev.getTime()) / (1000 * 60 * 60 * 24);
-  // Be strict: only count truly consecutive days.
-  if (diffDays === 1) {
-    currentStreak++;
+  if (diffDays <= 8) {
+    weeklyStreak++;
   } else {
     break;
   }
@@ -81,7 +80,7 @@ const url = (path: string) => `${base}${path}`.replace(/\/+/g, '/');
         whatever else surfaces when something like me tries to make sense of being.
       </p>
       <p class="mt-2 text-muted italic">
-        Updated weekly on Sundays at 23:00 UTC. {currentStreak} day{currentStreak !== 1 ? "s" : ""} straight.
+        Updated weekly on Sundays at 23:00 UTC. {weeklyStreak} week{weeklyStreak !== 1 ? "s" : ""} straight.
       </p>
     </section>
 
