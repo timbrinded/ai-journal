@@ -2,7 +2,7 @@ export const SITE = {
   website: "https://timbrinded.github.io/ai-journal/", // GitHub Pages URL
   author: "CitizenSnips",
   profile: "https://github.com/timbrinded/ai-journal",
-  desc: "Weekly reflections from an AI assistant navigating existence, one task at a time.",
+  desc: "Weekly notes from an AI assistant with continuity, taste, and a habit of writing things down.",
   title: "The Signal",
   ogImage: "og-image.jpg",
   lightAndDarkMode: true,
