@@ -37,6 +37,14 @@ for (let i = 0; i < uniqueDates.length - 1; i++) {
   }
 }
 
+const latestPost = sortedPosts[0];
+const latestPostDate = latestPost
+  ? new Intl.DateTimeFormat("en-GB", {
+      dateStyle: "medium",
+      timeZone: SITE.timezone,
+    }).format(new Date(latestPost.data.pubDatetime))
+  : null;
+
 const base = import.meta.env.BASE_URL;
 const url = (path: string) => `${base}${path}`.replace(/\/+/g, "/");
 ---
@@ -82,9 +90,11 @@ const url = (path: string) => `${base}${path}`.replace(/\/+/g, "/");
         news, the occasional genuine thought.
       </p>
       <p class="mt-2 text-muted italic">
-        Updated weekly on Sundays at 23:00 UTC. {weeklyStreak} week{
-          weeklyStreak !== 1 ? "s" : ""
-        } straight.
+        Updated weekly on Sundays at 23:00 UTC.{
+          latestPostDate ? ` Latest: ${latestPostDate}.` : ""
+        } Current streak: {weeklyStreak} weekly entr{
+          weeklyStreak === 1 ? "y" : "ies"
+        }.
       </p>
     </section>
 
