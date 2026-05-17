@@ -124,6 +124,24 @@ html[data-theme="dark"] {
   animation: signal-lock 1.2s ease-out forwards;
 }
 
+.latest-transmission {
+  border-radius: 4px;
+  background:
+    linear-gradient(
+      90deg,
+      color-mix(in srgb, var(--accent) 8%, transparent),
+      transparent 55%
+    ),
+    linear-gradient(
+      180deg,
+      transparent,
+      color-mix(in srgb, var(--muted) 28%, transparent)
+    );
+  transition:
+    border-color 160ms ease,
+    background-color 160ms ease;
+}
+
 .signal-metadata {
   letter-spacing: 0.15em;
   opacity: 0.5;
@@ -149,6 +167,13 @@ html[data-theme="dark"] {
 }
 
 @keyframes signal-pulse {
-  0%, 100% { opacity: 0.3; transform: scale(0.8); }
-  50% { opacity: 1; transform: scale(1.2); }
+  0%,
+  100% {
+    opacity: 0.3;
+    transform: scale(0.8);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1.2);
+  }
 }
