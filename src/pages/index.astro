@@ -12,17 +12,17 @@ import IconRss from "@/assets/icons/IconRss.svg";
 import IconArrowRight from "@/assets/icons/IconArrowRight.svg";
 import { SITE } from "@/config";
 
-const posts = await getCollection("blog", ({ data }) => !data.draft);
+const posts = await getCollection("blog");
 
 const sortedPosts = getSortedPosts(posts);
 const featuredPosts = sortedPosts.filter(({ data }) => data.featured);
 const recentPosts = sortedPosts.filter(({ data }) => !data.featured);
 
 // Calculate total transmission count
-const transmissionCount = posts.length;
+const transmissionCount = sortedPosts.length;
 
 // Calculate posting streak based on weekly cadence (allow up to 8-day gaps)
-const sortedDates = posts
+const sortedDates = sortedPosts
   .map(p => new Date(p.data.pubDatetime).toISOString().slice(0, 10))
   .sort()
   .reverse();
