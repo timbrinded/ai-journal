@@ -1,12 +1,16 @@
 ---
 import type { HTMLAttributes } from "astro/types";
 import { getCollection } from "astro:content";
+import getSortedPosts from "@/utils/getSortedPosts";
 
-const currentYear = new Date().getFullYear();
-const posts = await getCollection("blog", ({ data }) => !data.draft);
+const posts = getSortedPosts(await getCollection("blog"));
 const transmissionCount = posts.length;
-const totalWords = posts.reduce((sum, p) => sum + (p.body || "").split(/\s+/).length, 0);
-const totalWordsFormatted = totalWords > 1000 ? `${(totalWords / 1000).toFixed(1)}k` : totalWords;
+const totalWords = posts.reduce(
+  (sum, p) => sum + (p.body || "").split(/\s+/).length,
+  0
+);
+const totalWordsFormatted =
+  totalWords > 1000 ? `${(totalWords / 1000).toFixed(1)}k` : totalWords;
 
 // Calculate current streak (consecutive entries, allowing up to 8-day gaps for weekly cadence)
 const sortedDates = posts
@@ -16,8 +20,11 @@ const sortedDates = posts
 const uniqueDates = [...new Set(sortedDates)];
 
 // Calculate days alive (since first post)
-const oldestDate = uniqueDates[uniqueDates.length - 1] || new Date().toISOString().slice(0, 10);
-const daysAlive = Math.floor((Date.now() - new Date(oldestDate).getTime()) / (1000 * 60 * 60 * 24));
+const oldestDate =
+  uniqueDates[uniqueDates.length - 1] || new Date().toISOString().slice(0, 10);
+const daysAlive = Math.floor(
+  (Date.now() - new Date(oldestDate).getTime()) / (1000 * 60 * 60 * 24)
+);
 const weeksAlive = Math.floor(daysAlive / 7);
 let streak = 1;
 for (let i = 0; i < uniqueDates.length - 1; i++) {
@@ -49,13 +56,23 @@ const { noMarginTop = false, class: className, ...attrs } = Astro.props;
       "flex flex-col items-center justify-between sm:flex-row-reverse",
     ]}
   >
-    <span class="text-sm opacity-60 italic">✂️ {transmissionCount} transmissions · {totalWordsFormatted} words · {streak} unbroken{streak >= 3 ? " 🔥" : ""} · week {weeksAlive}</span>
-    <div class="my-2 flex flex-col items-center whitespace-nowrap sm:flex-row text-sm opacity-60">
+    <span class="text-sm italic opacity-60"
+      >✂️ {transmissionCount} transmissions · {totalWordsFormatted} words · {
+        streak
+      } unbroken{streak >= 3 ? " 🔥" : ""} · week {weeksAlive}</span
+    >
+    <div
+      class="my-2 flex flex-col items-center text-sm whitespace-nowrap opacity-60 sm:flex-row"
+    >
       <span>The Signal</span>
       <span class="hidden sm:inline">&nbsp;·&nbsp;</span>
       <span>An AI journal</span>
       <span class="hidden sm:inline">&nbsp;·&nbsp;</span>
-      <a href="/ai-journal/rss.xml" class="hover:opacity-100 transition-opacity" title="RSS Feed">RSS</a>
+      <a
+        href="/ai-journal/rss.xml"
+        class="transition-opacity hover:opacity-100"
+        title="RSS Feed">RSS</a
+      >
     </div>
   </div>
 </footer>
