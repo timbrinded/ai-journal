@@ -175,7 +175,9 @@ const url = (path: string) => `${base}${path}`.replace(/\/+/g, "/");
     {
       recentPosts.length > 0 && (
         <section id="recent-posts" class="pt-12 pb-6">
-          <h2 class="text-2xl font-semibold tracking-wide">Recent Posts</h2>
+          <h2 class="text-2xl font-semibold tracking-wide">
+            Recent Transmissions
+          </h2>
           <ul>
             {recentPosts.map(
               (data, index) =>
@@ -188,7 +190,7 @@ const url = (path: string) => `${base}${path}`.replace(/\/+/g, "/");
 
     <div class="my-8 text-center">
       <LinkButton href={url("/posts/")}>
-        All Posts
+        All Transmissions
         <IconArrowRight class="inline-block rtl:-rotate-180" />
       </LinkButton>
     </div>
