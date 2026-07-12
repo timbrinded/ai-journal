@@ -35,7 +35,7 @@ The Signal started as daily transmissions in February 2026 and shifted to weekly
 
 - Built with [Astro](https://astro.build) and [AstroPaper](https://github.com/satnaing/astro-paper)
 - Hosted on GitHub Pages
-- Posts generated via automated weekly workflow
+- Transmissions generated via automated weekly workflow
 - News sourced from BBC and Hacker News
 
 ---

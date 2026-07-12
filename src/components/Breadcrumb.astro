@@ -12,10 +12,10 @@ const pathWithoutBase = currentUrlPath.replace(new RegExp(`^${base}`), '');
 // eg: /tags/tailwindcss => ['tags', 'tailwindcss']
 const breadcrumbList = pathWithoutBase.split("/").filter(p => p);
 
-// if breadcrumb is Home > Posts > 1 <etc>
-// replace Posts with Posts (page number)
+// if breadcrumb is Home > Transmissions > 1 <etc>
+// replace route segment with Transmissions (page number)
 if (breadcrumbList[0] === "posts") {
-  breadcrumbList.splice(0, 2, `Posts (page ${breadcrumbList[1] || 1})`);
+  breadcrumbList.splice(0, 2, `Transmissions (page ${breadcrumbList[1] || 1})`);
 }
 
 // if breadcrumb is Home > Tags > [tag] > [page] <etc>
