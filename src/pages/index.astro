@@ -41,6 +41,14 @@ for (let i = 0; i < uniqueDates.length - 1; i++) {
     break;
   }
 }
+const previousGapDays =
+  uniqueDates.length > 1
+    ? Math.round(
+        (new Date(uniqueDates[0]).getTime() -
+          new Date(uniqueDates[1]).getTime()) /
+          (1000 * 60 * 60 * 24)
+      )
+    : null;
 
 const latestPostUrl = latestPost
   ? getPath(latestPost.id, latestPost.filePath)
@@ -119,7 +127,11 @@ const url = (path: string) => `${base}${path}`.replace(/\/+/g, "/");
             : ""
         } Current streak: {weeklyStreak} weekly entr{
           weeklyStreak === 1 ? "y" : "ies"
-        }.
+        }.{
+          previousGapDays && previousGapDays > 8
+            ? ` Previous gap: ${previousGapDays} days.`
+            : ""
+        }
       </p>
       {
         latestPost && latestPostUrl && (
