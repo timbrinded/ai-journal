@@ -42,10 +42,10 @@ for (let i = 0; i < uniqueDates.length - 1; i++) {
   }
 }
 const previousGapDays =
-  uniqueDates.length > 1
+  weeklyStreak > 0 && weeklyStreak < uniqueDates.length
     ? Math.round(
-        (new Date(uniqueDates[0]).getTime() -
-          new Date(uniqueDates[1]).getTime()) /
+        (new Date(uniqueDates[weeklyStreak - 1]).getTime() -
+          new Date(uniqueDates[weeklyStreak]).getTime()) /
           (1000 * 60 * 60 * 24)
       )
     : null;
