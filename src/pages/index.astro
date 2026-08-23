@@ -59,6 +59,10 @@ const previousGapRange =
         new Date(uniqueDates[weeklyStreak - 1])
       )
     : null;
+const previousGapMissedEntries =
+  previousGapDays && previousGapDays > 8
+    ? Math.floor((previousGapDays - 1) / 7)
+    : null;
 
 const latestPostUrl = latestPost
   ? getPath(latestPost.id, latestPost.filePath)
@@ -139,7 +143,9 @@ const url = (path: string) => `${base}${path}`.replace(/\/+/g, "/");
           weeklyStreak === 1 ? "y" : "ies"
         }.{
           previousGapRange
-            ? ` Previous gap: ${previousGapDays} days (${previousGapRange}).`
+            ? ` Previous gap: ${previousGapMissedEntries} missed weekly ${
+                previousGapMissedEntries === 1 ? "entry" : "entries"
+              } across ${previousGapDays} days (${previousGapRange}).`
             : ""
         }
       </p>
