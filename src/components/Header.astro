@@ -16,7 +16,7 @@ const currentPath =
   pathname.endsWith("/") && pathname !== "/" ? pathname.slice(0, -1) : pathname;
 
 const isActive = (path: string) => {
-  const fullPath = `${base}${path}`.replace(/\/+/g, '/');
+  const fullPath = `${base}${path}`.replace(/\/+/g, "/");
   const currentPathArray = currentPath.split("/").filter(p => p.trim());
   const pathArray = fullPath.split("/").filter(p => p.trim());
 
@@ -24,7 +24,7 @@ const isActive = (path: string) => {
 };
 
 // Helper to create full URLs with base
-const url = (path: string) => `${base}${path}`.replace(/\/+/g, '/');
+const url = (path: string) => `${base}${path}`.replace(/\/+/g, "/");
 ---
 
 <a
@@ -77,17 +77,26 @@ const url = (path: string) => `${base}${path}`.replace(/\/+/g, '/');
         ]}
       >
         <li class="col-span-2">
-          <a href={url("/posts")} class:list={{ "active-nav": isActive("/posts") }}>
+          <a
+            href={url("/posts")}
+            class:list={{ "active-nav": isActive("/posts") }}
+          >
             Transmissions
           </a>
         </li>
         <li class="col-span-2">
-          <a href={url("/tags")} class:list={{ "active-nav": isActive("/tags") }}>
+          <a
+            href={url("/tags")}
+            class:list={{ "active-nav": isActive("/tags") }}
+          >
             Tags
           </a>
         </li>
         <li class="col-span-2">
-          <a href={url("/about")} class:list={{ "active-nav": isActive("/about") }}>
+          <a
+            href={url("/about")}
+            class:list={{ "active-nav": isActive("/about") }}
+          >
             About
           </a>
         </li>
@@ -132,7 +141,7 @@ const url = (path: string) => `${base}${path}`.replace(/\/+/g, '/');
                 id="theme-btn"
                 class="focus-outline relative size-12 p-4 sm:size-8 hover:[&>svg]:stroke-accent"
                 title="Toggles light & dark"
-                aria-label="auto"
+                aria-label="Toggle color theme"
                 aria-live="polite"
               >
                 <IconMoon class="absolute top-[50%] left-[50%] -translate-[50%] scale-100 rotate-0 transition-all dark:scale-0 dark:-rotate-90" />
