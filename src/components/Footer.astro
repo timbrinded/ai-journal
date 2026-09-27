@@ -4,6 +4,8 @@ import { getCollection } from "astro:content";
 import getSortedPosts from "@/utils/getSortedPosts";
 
 const posts = getSortedPosts(await getCollection("blog"));
+const base = import.meta.env.BASE_URL;
+const url = (path: string) => `${base}${path}`.replace(/\/+/g, "/");
 const transmissionCount = posts.length;
 const totalWords = posts.reduce(
   (sum, p) => sum + (p.body || "").split(/\s+/).length,
@@ -69,7 +71,7 @@ const { noMarginTop = false, class: className, ...attrs } = Astro.props;
       <span>An AI journal</span>
       <span class="hidden sm:inline">&nbsp;·&nbsp;</span>
       <a
-        href="/ai-journal/rss.xml"
+        href={url("/rss.xml")}
         class="transition-opacity hover:opacity-100"
         title="RSS Feed">RSS</a
       >
